@@ -1,11 +1,14 @@
+# Imported modules will go here
 import pyautogui as pg
 import time
-# This program will use a pre defined sudoku puzzle and then solve it using back tracking
+from selenium import webdriver
+from bs4 import BeautifulSoup
 
 # Will display both the unsolved and solved Sudoku Puzzle
 def printSudoku(list, instruction):
 
     print("Here is the {} Sudoku-Puzzle: ".format(instruction))
+    
     '''
     # for loop to loop through the 2d list and print out the grid for the sudoku puzzle
     # Should look like this:
@@ -38,6 +41,7 @@ def printSudoku(list, instruction):
     print("-------------------------------\n")
 
 def automation(matrix):
+
     final = []
     str_fin = []
     for i in range(9):
@@ -59,6 +63,7 @@ def automation(matrix):
                 pg.hotkey('left')
 
 def solveSudoku(list):
+
     # loop through the 2d list
     for row in range(len(list)):
         for col in range(len(list)):
@@ -77,29 +82,34 @@ def solveSudoku(list):
     return True
 
 def checkIfZero(number):
+
     if number == 0:
         return True
     else:
         return False
 
 def checkIfValid(list, row, col, number):
+
     if ((checkRow(list, row, number) == True) or (checkCol(list, col, number) == True) or (checkSubSquare(list, row, col, number) == True)):
         return False
     return True
 
 def checkRow(list, row, number):
+
     for i in range(len(list)):
         if list[row][i] == number:
             return True
     return False
 
 def checkCol(list, col, number):
+
     for j in range(len(list)):
         if list[j][col] == number:
             return True
     return False
 
 def checkSubSquare(list, row, col, number):
+
     temp_r = row - row % 3
     temp_c = col - col % 3
     for i in range(temp_r, temp_r + 3):
