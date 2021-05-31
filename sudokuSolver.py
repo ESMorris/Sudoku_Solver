@@ -1,11 +1,14 @@
+# Imported modules will go here
 import pyautogui as pg
 import time
-# This program will use a pre defined sudoku puzzle and then solve it using back tracking
+from selenium import webdriver
+from bs4 import BeautifulSoup
 
 # Will display both the unsolved and solved Sudoku Puzzle
 def printSudoku(list, instruction):
 
     print("Here is the {} Sudoku-Puzzle: ".format(instruction))
+    
     '''
     # for loop to loop through the 2d list and print out the grid for the sudoku puzzle
     # Should look like this:
@@ -38,6 +41,7 @@ def printSudoku(list, instruction):
     print("-------------------------------\n")
 
 def automation(matrix):
+
     final = []
     str_fin = []
     for i in range(9):
@@ -59,6 +63,7 @@ def automation(matrix):
                 pg.hotkey('left')
 
 def solveSudoku(list):
+
     # loop through the 2d list
     for row in range(len(list)):
         for col in range(len(list)):
@@ -77,29 +82,34 @@ def solveSudoku(list):
     return True
 
 def checkIfZero(number):
+
     if number == 0:
         return True
     else:
         return False
 
 def checkIfValid(list, row, col, number):
+
     if ((checkRow(list, row, number) == True) or (checkCol(list, col, number) == True) or (checkSubSquare(list, row, col, number) == True)):
         return False
     return True
 
 def checkRow(list, row, number):
+
     for i in range(len(list)):
         if list[row][i] == number:
             return True
     return False
 
 def checkCol(list, col, number):
+
     for j in range(len(list)):
         if list[j][col] == number:
             return True
     return False
 
 def checkSubSquare(list, row, col, number):
+
     temp_r = row - row % 3
     temp_c = col - col % 3
     for i in range(temp_r, temp_r + 3):
@@ -111,20 +121,44 @@ def checkSubSquare(list, row, col, number):
 # main function (also the main runner of the code)
 def main():
 
-    # list variable to hold the 9x9 sudoku puzzle
+    # list variable to hold the final 9x9 sudoku puzzle
     grid = []
-    while True:
-        row = list(input('Row: '))
-        ints = []
 
-        for n in row:
-            ints.append(int(n))
+    # holds the url needed to webscrape
+    url = 'https://nine.websudoku.com/?'
+
+    # the Firefox web browser will be the driver for the web scrape
+    driver = webdriver.Firefox()
+
+    # using the Firefox web browser go to the url above
+    driver.get(url)
+
+    # Using Beautiful soup we will load the parser we will be using which is lxml
+    # the .pagesource tells the beautifulsoup to get the html contents off the opened web browser
+    soup = BeautifulSoup(driver.page_source, 'lxml')
+
+    # find the element named table
+    table = soup.find('table', class_='t')
+
+    # nested for loop to web scrape the Sudoku puzzle on the web page
+    # looking for all elements within table labeled tr
+    for element in table.find_all('tr'):
+        # a 2nd list to hold the 9 values per row
+        ints = []
+        # looking for all html elements within tr labeled input
+        for number in element.find_all('input'):
+            # try/ Exception to catch if there is no html element labeled value
+            try:
+                # place the value into the ints list
+                ints.append(int(number['value']))
+            except Exception as e:
+                # If there is no element labeled value place a zero at that index
+                value = 0
+                # place a zero into the ints list
+                ints.append(value)
+        # append the completed row into the list grid
         grid.append(ints)
 
-        if len(grid) == 9:
-            break
-        print('Row ' + str(len(grid)) + ' Complete')
-    
     print()
     printSudoku(grid, 'unsolved')
 
