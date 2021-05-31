@@ -121,19 +121,23 @@ def checkSubSquare(list, row, col, number):
 # main function (also the main runner of the code)
 def main():
 
-    # list variable to hold the 9x9 sudoku puzzle
+    # list variable to hold the final 9x9 sudoku puzzle
     grid = []
-    while True:
-        row = list(input('Row: '))
-        ints = []
 
-        for n in row:
-            ints.append(int(n))
-        grid.append(ints)
+    # holds the url needed to webscrape
+    url = 'https://nine.websudoku.com/?'
 
-        if len(grid) == 9:
-            break
-        print('Row ' + str(len(grid)) + ' Complete')
+    # the Firefox web browser will be the driver for the web scrape
+    driver = webdriver.Firefox()
+
+    # using the Firefox web browser go to the url above
+    driver.get(url)
+
+    
+
+
+
+
     
     print()
     printSudoku(grid, 'unsolved')
