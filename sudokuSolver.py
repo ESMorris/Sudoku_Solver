@@ -133,7 +133,9 @@ def main():
     # using the Firefox web browser go to the url above
     driver.get(url)
 
-    
+    # Using Beautiful soup we will load the parser we will be using which is lxml
+    # the .pagesource tells the beautifulsoup to get the html contents off the opened web browser
+    soup = BeautifulSoup(driver.page_source, 'lxml')
 
 
 
