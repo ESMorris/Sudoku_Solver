@@ -168,6 +168,7 @@ def main():
         time.sleep(3)
         automation(grid)
         printSudoku(grid, 'solved')
+    # cannot be solved print that it cannot!
     else:
         print("Cannot be solved!")
 
