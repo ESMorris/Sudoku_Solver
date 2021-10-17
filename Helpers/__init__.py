@@ -1,2 +1,1 @@
-from Helpers import print
-from Helpers import Solver
+from Helpers import print, Solver, web_scraping
