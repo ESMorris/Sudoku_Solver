@@ -1,8 +1,9 @@
+// Getting the document ready
 $(document).ready(function(){
 
-    // Jquery code added here
+    // Changing the background and text to a dark mode theme
+    // When button is clicked
     $("#toggle").click(function(){
-        console.log("Success!!!");
         var element = document.body;
         element.classList.toggle("dark-mode");
     });
