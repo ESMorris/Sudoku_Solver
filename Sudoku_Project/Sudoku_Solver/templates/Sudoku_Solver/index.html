@@ -1,5 +1,5 @@
 {% load static %}
-<html lang="en">
+<html lang="en" style="padding-top: 80px;">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,9 +21,23 @@
     <title>Sudoku Solver</title>
 </head>
 <body>
-    <h2>Toggle Dark/Light Mode</h2>
-    <p>Click the button to toggle between dark and light mode for this page.</p>
-    <button class="btn btn-primary" id="toggle">Toggle dark mode</button>
 
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Sudoku Solver</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+
+    <main role="main">
+        <div class="container">
+            <table id="grid">
+            </table>
+            <br><br>
+            <button class="btn btn-primary" id="startBtn">Start</button>
+            <button class="btn btn-danger" id="stopBtn">Stop</button>
+        </div>
+    </main>
 </body>
 </html>

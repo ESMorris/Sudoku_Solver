@@ -3,6 +3,6 @@
 - [x] Add helper functions under the Helpers folder
 
 ## Next
-- [ ] Make html and css for Sudoku
-- [ ] Setup Django
-- [ ] Implement js 
+* [ ] Setup Django and routes for the game (in progress)
+    * [ ] Make html and css for Sudoku (in progress)
+    * [ ] Implement js (in progress)
